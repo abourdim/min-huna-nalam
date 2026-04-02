@@ -1,0 +1,12 @@
+{
+  "name": "This Is Where We Learn — من هنا نعلم",
+  "short_name": "من هنا نعلم",
+  "description": "Interactive trilingual app based on Sheikh Mohammed al-Ghazali's book — Islam as both religion and state",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#E0F2F1",
+  "theme_color": "#00695C",
+  "lang": "ar",
+  "dir": "rtl",
+  "icons": []
+}
