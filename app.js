@@ -454,7 +454,6 @@ function getEarnedBadges() { return JSON.parse(localStorage.getItem(LS_PREFIX+'b
 function updateXPDisplay() {
   const xp = getXP();
   const el = document.getElementById('xpDisplay');
-  if (!el) return;
   if (el) {
     const currentBadge = [...BADGES].reverse().find(b => xp >= b.xp) || BADGES[0];
     const nextBadge = BADGES.find(b => xp < b.xp);
@@ -585,7 +584,6 @@ function initSplash() {
   (document.getElementById('splashFeatures')||{}).innerHTML= features.map(f => `<div class="splash-feat">${f}</div>`).join('');
   let count = 5;
   const el = document.getElementById('splashCount');
-  if (!el) return;
   const timer = setInterval(() => {
     count--;
     if (el) el.textContent = count;
@@ -594,7 +592,6 @@ function initSplash() {
 }
 function dismissSplash() {
   const s = document.getElementById('splash');
-  if (!s) return;
   if (s) { s.style.opacity = '0'; setTimeout(() => s.style.display = 'none', 400); }
 }
 
@@ -755,7 +752,6 @@ function showQuestion() {
   const q = qs[quizState.current];
   const qd = q[lang];
   const container = document.getElementById('quizContainer');
-  if (!container) return;
   container.innerHTML = `
     <div class="quiz-progress">
       <div class="quiz-progress-text">${quizState.current+1}/${qs.length}</div>
@@ -818,7 +814,6 @@ function showQuizResult() {
   else { emoji='📍'; title=lang==='ar'?'ابدأ من هنا!':lang==='fr'?'Commencez ici !':'Start here!'; }
   addXP(20);
   const result = document.getElementById('quizResult');
-  if (!result) return;
   result.classList.remove('hidden');
   result.innerHTML = `
     <div class="qr-emoji">${emoji}</div>
@@ -964,7 +959,6 @@ function renderDuas() {
 // ═══════════════ CONFETTI ═══════════════
 function launchConfetti() {
   const canvas = document.getElementById('confettiCanvas');
-  if (!canvas) return;
   canvas.style.display = 'block';
   const ctx = canvas.getContext('2d');
   canvas.width = window.innerWidth; canvas.height = window.innerHeight;
@@ -996,16 +990,13 @@ function initKeyboardNav() {
   document.addEventListener('keydown', (e) => {
     if (e.key==='Escape') {
       const hp = document.getElementById('helpPanel');
-      if (!hp) return;
       if (!hp.classList.contains('hidden')) { toggleHelp(); return; }
       const dp = document.getElementById('duaPanel');
-      if (!dp) return;
       if (!dp.classList.contains('hidden')) { toggleDuaPanel(); return; }
       document.querySelectorAll('.knowledge-card.open').forEach(c => c.classList.remove('open'));
     }
     if (e.key==='ArrowRight'||e.key==='ArrowLeft') {
       const kp = document.getElementById('panel-knowledge');
-      if (!kp) return;
       if (!kp||!kp.classList.contains('active')) return;
       if (document.activeElement&&document.activeElement.id==='knowledgeSearch') return;
       e.preventDefault();
@@ -1031,14 +1022,11 @@ function toggleHelp() { document.getElementById('helpPanel').classList.toggle('h
 function toggleDuaPanel() { document.getElementById('duaPanel').classList.toggle('hidden'); playSound('click'); }
 function showToast(msg) {
   const t = document.getElementById('toast');
-  if (!t) return;
   const m = document.getElementById('toastMsg');
-  if (!m) return;
   if (t&&m) { m.textContent=msg; t.style.display='block'; setTimeout(()=>t.style.display='none',2500); }
 }
 function initScrollTop() {
   const btn = document.getElementById('scrollTop');
-  if (!btn) return;
   window.addEventListener('scroll', () => { if (btn) btn.classList.toggle('visible', window.scrollY>300); });
 }
 
@@ -1090,7 +1078,6 @@ function initTicker() {
   const sep = '   ✦   ';
   const full = list.join(sep) + sep;
   const el = document.getElementById('tickerText');
-  if (!el) return;
   if (el) {
     el.innerHTML = `<span class="tc">${full}</span><span class="tc">${full}</span>`;
     el.style.animation = `tickerMarquee ${full.length*0.15}s linear infinite`;
