@@ -531,22 +531,22 @@ function setLang(l) {
   document.documentElement.lang = l;
   document.documentElement.dir = l === 'ar' ? 'rtl' : 'ltr';
   const t = T[l];
-  document.getElementById('appTitle').textContent = t.appTitle;
-  document.getElementById('tabHome').textContent = t.tabHome;
-  document.getElementById('tabKnowledge').textContent = t.tabKnowledge;
-  document.getElementById('tabPath').textContent = t.tabPath;
-  document.getElementById('tabQuiz').textContent = t.tabQuiz;
-  document.getElementById('tabAbout').textContent = t.tabAbout;
-  document.getElementById('knowledgeTitle').textContent = t.knowledgeTitle;
-  document.getElementById('knowledgeDesc').textContent = t.knowledgeDesc;
-  document.getElementById('pathTitle').textContent = t.pathTitle;
-  document.getElementById('pathDesc').textContent = t.pathDesc;
-  document.getElementById('quizTitle').textContent = t.quizTitle;
-  document.getElementById('quizDesc').textContent = t.quizDesc;
-  document.getElementById('helpTitle').textContent = t.helpTitle;
-  document.getElementById('duaPanelTitle').textContent = t.duaPanelTitle;
-  document.getElementById('splashSub').textContent = t.splashSub;
-  document.getElementById('splashHint').textContent = t.splashHint;
+  { const _e=document.getElementById('appTitle'); if(_e) _e.textContent=t.appTitle; }
+  { const _e=document.getElementById('tabHome'); if(_e) _e.textContent=t.tabHome; }
+  { const _e=document.getElementById('tabKnowledge'); if(_e) _e.textContent=t.tabKnowledge; }
+  { const _e=document.getElementById('tabPath'); if(_e) _e.textContent=t.tabPath; }
+  { const _e=document.getElementById('tabQuiz'); if(_e) _e.textContent=t.tabQuiz; }
+  { const _e=document.getElementById('tabAbout'); if(_e) _e.textContent=t.tabAbout; }
+  { const _e=document.getElementById('knowledgeTitle'); if(_e) _e.textContent=t.knowledgeTitle; }
+  { const _e=document.getElementById('knowledgeDesc'); if(_e) _e.textContent=t.knowledgeDesc; }
+  { const _e=document.getElementById('pathTitle'); if(_e) _e.textContent=t.pathTitle; }
+  { const _e=document.getElementById('pathDesc'); if(_e) _e.textContent=t.pathDesc; }
+  { const _e=document.getElementById('quizTitle'); if(_e) _e.textContent=t.quizTitle; }
+  { const _e=document.getElementById('quizDesc'); if(_e) _e.textContent=t.quizDesc; }
+  { const _e=document.getElementById('helpTitle'); if(_e) _e.textContent=t.helpTitle; }
+  { const _e=document.getElementById('duaPanelTitle'); if(_e) _e.textContent=t.duaPanelTitle; }
+  { const _e=document.getElementById('splashSub'); if(_e) _e.textContent=t.splashSub; }
+  { const _e=document.getElementById('splashHint'); if(_e) _e.textContent=t.splashHint; }
   document.querySelectorAll('.lang-opt').forEach(b => b.classList.toggle('active', b.dataset.lang === l));
   renderAll();
   initScrollReveal();
@@ -558,7 +558,7 @@ function cycleTheme() {
   theme = THEMES[idx];
   localStorage.setItem(LS_PREFIX+'theme', theme);
   document.documentElement.setAttribute('data-theme', theme);
-  document.getElementById('themeIcon').textContent = THEME_ICONS[idx];
+  { const _e=document.getElementById('themeIcon'); if(_e) _e.textContent=THEME_ICONS[idx]; }
   playSound('theme');
 }
 
@@ -581,7 +581,7 @@ function initTabs() {
 // ═══════════════ SPLASH ═══════════════
 function initSplash() {
   const features = T[lang].splashFeatures;
-  document.getElementById('splashFeatures').innerHTML = features.map(f => `<div class="splash-feat">${f}</div>`).join('');
+  (document.getElementById('splashFeatures')||{}).innerHTML= features.map(f => `<div class="splash-feat">${f}</div>`).join('');
   let count = 5;
   const el = document.getElementById('splashCount');
   const timer = setInterval(() => {
@@ -601,7 +601,7 @@ function renderHome() {
   const dayIdx = new Date().getDate() % KNOWLEDGE.length;
   const k = KNOWLEDGE[dayIdx];
   const kd = k[lang];
-  document.getElementById('dailyCard').innerHTML = `
+  (document.getElementById('dailyCard')||{}).innerHTML= `
     <div class="daily-label">${t.dailyLabel}</div>
     <div class="daily-title">${kd.title}</div>
     <div class="daily-body">${kd.desc}</div>
@@ -613,7 +613,7 @@ function renderHome() {
     {icon:'🧠',tab:'quiz',title:t.tabQuiz,desc:lang==='ar'?'اختبر معرفتك':lang==='fr'?'Testez vos connaissances':'Test your knowledge'},
     {icon:'📖',tab:'about',title:t.tabAbout,desc:lang==='ar'?'عن الكتاب والمؤلف':lang==='fr'?'Le livre et l\'auteur':'Book & author'},
   ];
-  document.getElementById('homeGrid').innerHTML = sections.map(s => `
+  (document.getElementById('homeGrid')||{}).innerHTML= sections.map(s => `
     <div class="home-card" onclick="document.querySelector('[data-tab=${s.tab}]').click()">
       <span class="hc-icon">${s.icon}</span>
       <div class="hc-title">${s.title}</div>
@@ -661,7 +661,7 @@ function renderKnowledge() {
       </div>
     </div>`;
   }).join('');
-  document.getElementById('knowledgeContainer').innerHTML = searchBar + cards;
+  (document.getElementById('knowledgeContainer')||{}).innerHTML= searchBar + cards;
 }
 
 function filterKnowledge(query) {
@@ -694,7 +694,7 @@ async function shareCard(idx) {
 function renderPath() {
   const xp = getXP();
   const readCards = getReadCards();
-  document.getElementById('pathContainer').innerHTML = PATH_STAGES.map(s => {
+  (document.getElementById('pathContainer')||{}).innerHTML= PATH_STAGES.map(s => {
     const d = s[lang];
     const unlocked = xp >= s.unlockAt;
     return `
@@ -724,7 +724,7 @@ let quizState = { current:0, score:0, answered:[], lifelines:{fifty:true,hint:tr
 function renderQuiz() {
   quizState = { current:0, score:0, answered:[], lifelines:{fifty:true,hint:true,istikhara:true}, level:1, active:false };
   const t = T[lang];
-  document.getElementById('quizContainer').innerHTML = `
+  (document.getElementById('quizContainer')||{}).innerHTML= `
     <div class="quiz-start">
       <div class="quiz-start-icon">🧠</div>
       <div class="quiz-start-title">${t.quizTitle}</div>
@@ -823,7 +823,7 @@ function showQuizResult() {
   `;
   result.scrollIntoView({behavior:'smooth'});
   if (pct >= 80) launchConfetti();
-  document.getElementById('quizContainer').innerHTML = '';
+  (document.getElementById('quizContainer')||{}).innerHTML= '';
 }
 
 // ═══════════════ LIFELINES ═══════════════
@@ -901,7 +901,7 @@ function renderAbout() {
     }
   };
   const a = about[lang];
-  document.getElementById('aboutContainer').innerHTML = `
+  (document.getElementById('aboutContainer')||{}).innerHTML= `
     <div class="about-disclaimer"><div class="about-disclaimer-title">${a.disclaimerTitle}</div><p>${a.disclaimer}</p></div>
     <div class="about-author">
       <span class="about-author-icon">📚</span>
@@ -943,14 +943,14 @@ function renderHelp() {
       {title:'🤝 Contribuer',body:'GitHub : github.com/abourdim/min-huna-nalam'},
     ]
   };
-  document.getElementById('helpBody').innerHTML = help[lang].map(h => `
+  (document.getElementById('helpBody')||{}).innerHTML= help[lang].map(h => `
     <div class="help-item"><div class="help-item-title">${h.title}</div><div>${h.body}</div></div>
   `).join('');
 }
 
 // ═══════════════ RENDER: DUAS ═══════════════
 function renderDuas() {
-  document.getElementById('duaPanelContent').innerHTML = DUAS.map(d => {
+  (document.getElementById('duaPanelContent')||{}).innerHTML= DUAS.map(d => {
     const dd = d[lang];
     return `<div class="dua-item"><div class="dua-item-label">${dd.label}</div><div class="dua-item-ar">${dd.text}</div><div class="dua-item-tr">${dd.tr}</div></div>`;
   }).join('');
@@ -1088,7 +1088,7 @@ function initTicker() {
 // ═══════════════ BOOT ═══════════════
 document.addEventListener('DOMContentLoaded', () => {
   document.documentElement.setAttribute('data-theme', theme);
-  document.getElementById('themeIcon').textContent = THEME_ICONS[THEMES.indexOf(theme)];
+  { const _e=document.getElementById('themeIcon'); if(_e) _e.textContent=THEME_ICONS[THEMES.indexOf(theme)]; }
   initApp();
   initTicker();
   setTimeout(initScrollReveal, 500);
