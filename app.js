@@ -752,6 +752,7 @@ function showQuestion() {
   const q = qs[quizState.current];
   const qd = q[lang];
   const container = document.getElementById('quizContainer');
+  if (!container) return;
   container.innerHTML = `
     <div class="quiz-progress">
       <div class="quiz-progress-text">${quizState.current+1}/${qs.length}</div>
